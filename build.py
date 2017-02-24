@@ -3,10 +3,11 @@ import platform
 
 
 if __name__ == "__main__":
-    mingw_configurations = [("4.9", "x86_64", "seh", "posix"),
-                            ("4.9", "x86_64", "sjlj", "posix"),
-                            ("4.9", "x86", "sjlj", "posix"),
-                            ("4.9", "x86", "dwarf2", "posix")]
-    builder = ConanMultiPackager(mingw_configurations=mingw_configurations)
+    builder = ConanMultiPackager(username="uilianries")
     builder.add_common_builds(shared_option_name="zlib:shared", pure_c=True)
+    filtered_builds = []
+    for settings, options in builder.builds:
+        if settings["compiler.version"] == "4.1" and settings["arch"] == "x86_64":
+            filtered_builds.append([settings, options])
+    builder.builds = filtered_builds
     builder.run()
