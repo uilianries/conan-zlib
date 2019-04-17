@@ -5,7 +5,7 @@ from cpt.packager import ConanMultiPackager
 
 
 def is_hook_job():
-    return os.getenv("CONAN_GCC_VERSIONS", "") == "4.8"
+    return os.getenv("CONAN_GCC_VERSIONS", "") == "8"
 
 
 def docker_entry_script():
